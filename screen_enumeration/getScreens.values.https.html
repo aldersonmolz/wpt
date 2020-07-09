@@ -12,8 +12,8 @@
 
 screen_enumeration_test(async (t, mockScreenEnum) => {
   let display1 = makeDisplay(10,
-                             {x: 0, y: 10, width: 1200, height: 800},
-                             {x: 20, y: 30, width: 1000, height: 600},
+                             {x: 0, y: 0, width: 800, height: 600},
+                             {x: 0, y: 0, width: 800, height: 550},
                              1.0);
 
   mockScreenEnum.addDisplay(display1);
@@ -30,13 +30,13 @@ screen_enumeration_test(async (t, mockScreenEnum) => {
   assert_equals(screens.length, 1);
 
   assert_equals(screens[0].left, 0);
-  assert_equals(screens[0].top, 10);
-  assert_equals(screens[0].width, 1200);
-  assert_equals(screens[0].height, 800);
-  assert_equals(screens[0].availLeft, 20);
-  assert_equals(screens[0].availTop, 30);
-  assert_equals(screens[0].availWidth, 1000);
-  assert_equals(screens[0].availHeight, 600);
+  assert_equals(screens[0].top, 0);
+  assert_equals(screens[0].width, 800);
+  assert_equals(screens[0].height, 600);
+  assert_equals(screens[0].availLeft, 0);
+  assert_equals(screens[0].availTop, 0);
+  assert_equals(screens[0].availWidth, 800);
+  assert_equals(screens[0].availHeight, 550);
   assert_equals(screens[0].primary, true);
   assert_equals(screens[0].internal, true);
   assert_equals(screens[0].scaleFactor, 1.0);
@@ -45,19 +45,19 @@ screen_enumeration_test(async (t, mockScreenEnum) => {
 
 screen_enumeration_test(async (t, mockScreenEnum) => {
   let display1 = makeDisplay(10,
-                             {x: 0, y: 10, width: 1200, height: 800},
-                             {x: 20, y: 30, width: 1000, height: 600},
+                             {x: 0, y: 0, width: 800, height: 600},
+                             {x: 0, y: 0, width: 800, height: 550},
                              1.0);
 
   let display2 = makeDisplay(11,
-                             {x: 0, y: 10, width: 1200, height: 800},
-                             {x: 20, y: 30, width: 1000, height: 600},
-                             1.0);
+                             {x: 800, y: 0, width: 800, height: 600},
+                             {x: 800, y: 0, width: 800, height: 550},
+                             2.0);
 
   let display3 = makeDisplay(12,
-                             {x: 0, y: 10, width: 1200, height: 800},
-                             {x: 20, y: 30, width: 1000, height: 600},
-                             1.0);
+                             {x: 0, y: 600, width: 1200, height: 800},
+                             {x: 50, y: 50, width: 1150, height: 750},
+                             1.5);
 
   mockScreenEnum.addDisplay(display1);
   mockScreenEnum.addDisplay(display2);

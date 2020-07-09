@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Screen Enumeration: isMultiScreen() tentative</title>
+<!-- TODO: update link to W3C whenever specifications are ready -->
+<link rel="help" href="https://github.com/webscreens/screen-enumeration"/>
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script src="resources/screenenumeration-helpers.js"></script>
+<script>
+
+"use strict";
+
+screen_enumeration_test(async (t, mockScreenEnum) => {
+  let display1 = makeDisplay(10,
+                             {x: 0, y: 0, width: 800, height: 600},
+                             {x: 0, y: 0, width: 800, height: 550},
+                             1.0);
+
+  let display2 = makeDisplay(11,
+                             {x: 800, y: 0, width: 800, height: 600},
+                             {x: 800, y: 0, width: 800, height: 550},
+                             2.0);
+
+  mockScreenEnum.addDisplay(display1);
+  mockScreenEnum.setPrimaryId(mockScreenEnum.displays_[0].id);
+  mockScreenEnum.setInternalId(mockScreenEnum.displays_[0].id);
+  mockScreenEnum.setSuccess(true);
+
+  // This returns the mocked result via MockScreenEnumeration implementation.
+  assert_equals(await self.isMultiScreen(), false);
+  mockScreenEnum.addDisplay(display2);
+  assert_equals(await self.isMultiScreen(), true);
+  mockScreenEnum.removeDisplay(display2.id);
+  assert_equals(await self.isMultiScreen(), false);
+}, "isMultiScreen() works as expected with mocked screens");
+
+</script>

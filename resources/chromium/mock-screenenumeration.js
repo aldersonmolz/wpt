@@ -51,6 +51,13 @@ var ScreenEnumerationTest = (() => {
         success: this.success_,
       });
     }
+
+    async hasMultipleDisplays() {
+      return Promise.resolve({
+        result: this.displays_.length > 1,
+        success: this.success_,
+      });
+    }
   }
 
   let testInternal = {
