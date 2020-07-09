@@ -225,6 +225,10 @@ class FakeXRAnchorController {
     return this.deleted_;
   }
 
+  get paused() {
+    return this.paused_;
+  }
+
   pauseTracking() {
     if(!this.paused_) {
       this.paused_ = true;
@@ -980,7 +984,7 @@ class MockRuntime {
         const anchorData = new device.mojom.XRAnchorData();
         anchorData.id = id;
         if(!controller.paused) {
-          anchorData.pose = XRMathHelper.decomposeRigidTransform(
+          anchorData.mojoFromAnchor = XRMathHelper.decomposeRigidTransform(
             controller.getAnchorOrigin());
         }
 
